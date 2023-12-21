@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogwarts | El blog oficial de Hogwarts</title>
+
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Domine:wght@400;500;600;700&family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="header">
+        <img class="headerImg" src="https://assets.stickpng.com/images/6137929c4b96600004f676fe.png" alt="Escudo de Hogwarts">
+        <h1 class="headerTitle">Blogwarts</h1>
+    </header>
+
+    <main class="mainContainer">
+        <article class="blogArticle" id="art">
+            <div class="blogArticle-info">
+                <h2>Título artículo</h2>
+                <h3>Autor</h3>
+                <span>Descripción</span>
+            </div>
+            <div class="blogArticle-content">
+                <p>Texto de artículo</p>
+            </div>
+            <div class="blogArticle-tagList">
+                <span class="blogArticle-tag">Tags</span>
+            </div>
+        </article>
+    </main>
+
+    <section class="mainContainer">
+        <div>
+            <h1>Blogs relacionados</h1>
+        </div>
+        <div>
+            <h1>Últimos 10 blogs en Hogwarts</h1>
+        </div>
+    </section>
+
+
+    <script>
+
+        var url ="datos.json";
+
+        fetch(url)
+            .then(function(response) { 
+                if (!response.ok) {
+                    throw new Error("Error" + response.status);
+                }
+                return response.json();
+            })
+            .then(function(data) {
+                imprimirArticulo(data)
+                }
+            )
+
+        const articuloBox = document.getElementById("art");
+
+        articuloBox.innerHTML="";
+
+        function imprimirArticulo(articulo) {
+            console.log(articulo.titulo);
+            console.log(articulo.autor)
+
+            articuloBox.innerHTML +=
+            `<div class="blogArticle-info" style="background: url(${articulo.imagenFondo})">
+                <h2>${articulo.titulo}</h2>
+                <h3>${articulo.autor}</h3>
+                <span>${articulo.descrip}</span>
+            </div>
+            <div class="blogArticle-content">
+                <p>${articulo.contenido}</p>
+                <img class="blogArticle-contentImg" src="${articulo.imagen}" alt="">
+                
+                
+            </div>
+            <div class="blogArticle-tagList">
+                <span class="blogArticle-tag">Tags</span>
+            </div>`
+        };
+
+    </script>
+    
+</body>
+</html>
